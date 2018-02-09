@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- V -->
+    <div id="demo"></div>
+    <!-- React -->
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <!-- 注意类型 -->
+    <script type="text/babel">
+        // 定义组件
+        const XFather = React.createClass({
+            getInitialState(){
+                return {
+                    name: "第一个组件"
+                }
+            },
+            render(){
+                return (
+                    <div style={{border:'1px solid green',padding:"20px"}}>
+                        <input value={this.state.name} onChange={this.getInputValue} />
+                        <p ref="mydirevctive">{this.state.name}</p>
+                    </div>
+                )
+            },
+            getInputValue(event){
+                //console.log(event.target.value)
+                this.setState({
+                    name: event.target.value
+                })
+            },
+            componentWillUpdate(){
+                console.log(this.state)
+                console.log(this.refs.mydirevctive)
+                alert("------在组件接收到新的props或者state但还没有render时被调用-------")
+                //console.log(this.refs.mydirevctive)
+            },
+            componentDidUpdate(){
+                console.log(this.state)
+                console.log(this.refs.mydirevctive)
+                alert("------在组件完成更新后立即调用------")
+            }
+        })
+        ReactDOM.render(
+            <div>
+                <XFather />
+            </div>,
+            document.getElementById("demo")
+        )
+    </script>
+</body>
+</html>

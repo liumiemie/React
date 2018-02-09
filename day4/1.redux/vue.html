@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <div id="demo">
+
+  </div>
+  <script type="text/javascript" src="../../js/vue.js"></script>
+  <script type="text/javascript" src="../../js/redux.js"></script>
+  <script type="text/javascript">
+    var initialState = {
+      name: "",
+      age: ""
+    }
+    // 全局状态管理中心
+    var store = Redux.createStore(function(state = initialState, action) {
+      switch (action.type) {
+        case "chanageName":
+          //state.name = action.name
+          return Object.assign({}, state, {
+            name: action.name
+          })
+          break;
+        case "chanageAge":
+          return Object.assign({}, state, {
+            age: action.age
+          })
+        default:
+      }
+    })
+    console.log(store)
+    // $emit
+    // $on
+    // vuex 状态驱动
+    Vue.component("xfather", {
+      data: function() {
+        return {
+          name: "test",
+          age: ""
+        }
+      },
+      template: `
+        <div style="border:1px solid red">
+          父组件
+          <input v-model="name" />
+          <input v-model="age" />
+        </div>
+      `,
+      watch: {
+        name: function() {
+          var self = this;
+          //console.log(this.name)
+          store.dispatch({
+            type: 'chanageName',
+            name: self.name,
+          })
+        },
+        age: function() {
+          var self = this;
+          //console.log(this.name)
+          store.dispatch({
+            type: 'chanageAge',
+            age: self.age,
+          })
+        }
+      },
+      mounted: function() {
+        //监听状态
+        store.subscribe(function() {
+          console.log(store.getState())
+        })
+      }
+    })
+    Vue.component("xbrother", {
+      data: function() {
+        return {
+          name: "abcd",
+          age: ""
+        }
+      },
+      template: `
+        <div style="border:1px solid blue">
+          兄弟组件
+          <p>name:{{name}}</p>
+          <p>age:{{age}}</p>
+        </div>
+      `,
+      mounted: function() {
+        var self = this;
+        //监听状态
+        store.subscribe(function() {
+          console.log(store.getState())
+          self.name = store.getState().name
+          self.age = store.getState().age
+        })
+      }
+    })
+    new Vue({
+      el: "#demo",
+      template: `
+        <div>
+          <xfather />
+          <xbrother />
+        </div>
+      `
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- V -->
+    <div id="demo"></div>
+    <!-- React -->
+    <script src="../../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../../js/react-dom.js"></script>
+    <script src="../../js/babel.js"></script>
+    <!-- 注意类型 -->
+    <!-- <script type="text/babel">
+        // V <= Render(M) react 
+        // V <=> template(M) vue
+        // M
+        var data = {
+            name:456
+        }
+        ReactDOM.render(
+            <div>{data.name}</div>,
+            document.getElementById("demo")
+        )
+    </script> -->
+    <script>
+        var data = {
+            name:456
+        }
+        ReactDOM.render(
+            React.createElement("div",{id:1},data.name),
+            document.getElementById("demo")
+        )
+    </script>
+</body>
+</html>

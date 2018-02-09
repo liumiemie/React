@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo"></div>
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <script type="text/babel">
+        // 定义组件
+        //Vue.component("xxx",{}) 组件首字母大写
+        const Xfather = React.createClass({
+            getInitialState(){
+                return {
+                    message:"你的外卖"
+                }
+            },
+            render(){
+                return (
+                    <div style={{border:'1px solid red',padding:"20px"}}>
+                        父组件
+                        <Xchild name={this.state.message} shopid="1" />
+                        <Xchild name="你的货物" shopid="5" />
+                    </div>
+                )
+            }
+        })
+        const Xchild = React.createClass({
+            render(){
+                return (
+                    <div style={{border:'1px solid blue',padding:"20px"}}>
+                        子组件
+                        <p>{this.props.shopid}:{this.props.name}</p>
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(
+            <div style={{border:'1px solid black',padding:"20px"}}> 
+                大容器
+                <Xfather />
+            </div>,
+            document.getElementById("demo")
+        )
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo"></div>
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script type="text/babel">
+        const Xheader = React.createClass({
+            getInitialState(){
+                return {
+                    ask:"",
+                    answer:""
+                }
+            },
+            render(){
+                return (
+                    <div>
+                        <input value={this.state.ask} onChange={this.getInputValue} />
+                        <p>{this.state.answer?this.state.answer:"正在思考..."}</p>
+                        <button onClick={this.send}>发送</button>
+                    </div>
+                )
+            },
+            getInputValue(e){
+                this.setState({
+                    ask:e.target.value
+                })
+            },
+            send(){
+                var self = this
+                $.ajax({
+                    url:"http://www.tuling123.com/openapi/api?key=c75ba576f50ddaa5fd2a87615d144ecf",
+                    data:{
+                        info:self.state.ask
+                    },
+                    success(data){
+                        console.log(data)
+                        self.setState({
+                            answer:data.text
+                        })
+                    }
+                })
+            }
+        })
+        ReactDOM.render(
+            <div>
+                <Xheader />
+            </div>,
+            document.getElementById("demo")
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- V -->
+    <div id="demo"></div>
+    <!-- React -->
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <!-- 注意类型 -->
+    <script type="text/babel">
+        const Xheader = React.createClass({
+            getInitialState(){
+                return {
+                    bool: true,
+                    arr:["a","b","c"],
+                    html: <p>123<span style={{color:'red'}}>456</span></p>
+                }
+            },
+            render(){
+                return (
+                    <div>
+                        <p style={{color:"red"}}>1.v-show</p>
+                        <p style={{display:this.state.bool?"block":"none"}}>显示或者隐藏</p>
+                        <button onClick={this.changeBool}>OK</button>
+
+                        <p style={{color:"red"}}>2.v-if</p>
+                        {function(self) {
+                           if(self.state.bool){
+                               return <p>显示或者隐藏</p>
+                           }else{
+                               return
+                           }
+                        }(this)}
+
+                        <p style={{color:"red"}}>3.v-for</p>
+                        <ul>{
+                            function(self) {
+                                return self.state.arr.map((item,index)=>{
+                                    return <li key={index}>{item}</li>
+                                })
+                            }(this)
+                        }</ul>
+
+                        <p style={{color:"red"}}>4.v-html</p>
+                        <div>{this.state.html}</div>
+                    </div>
+                )
+            },
+            changeBool(){
+                this.setState({
+                    bool:!this.state.bool
+                })
+            }
+        })
+        ReactDOM.render(
+            <div>
+                <Xheader />
+            </div>,
+            document.getElementById("demo")
+        )
+    </script>
+</body>
+</html>

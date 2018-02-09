@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- V -->
+    <div id="demo"></div>
+    <!-- React -->
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <!-- 注意类型 -->
+    <script type="text/babel">
+        // 定义组件
+        const XFather = React.createClass({
+            getInitialState(){
+                return {
+                    name: "父组件",
+                    bool: true
+                }
+            },
+            render(){
+                return (
+                    <div style={{border:'1px solid green',padding:"20px"}}>
+                        <p>{this.state.name}</p>
+                        <button onClick={this.toggle}>增加或者删除</button>
+                        {/*v-if*/}
+                        {function(self) {
+                            if(self.state.bool){
+                                return <XChild /> 
+                            }else{
+                                return
+                            }
+                        }(this)}
+                    </div>
+                )
+            },
+            toggle(){
+                this.setState({
+                    bool: !this.state.bool
+                })
+            }
+        })
+        const XChild = React.createClass({
+            getInitialState(){
+                return {
+                    name: "子组件"
+                }
+            },
+            render(){
+                return (
+                    <div style={{border:'1px solid red',padding:"20px"}}>
+                        <p>{this.state.name}</p>
+                    </div>
+                )
+            },
+            componentWillUnmount(){
+                console.log("--------在组件从 DOM 中移除的时候立刻被调用----------")
+            },
+            componentWillMount (){
+                console.log("---------在渲染前调用-----------")
+            }
+        })
+        ReactDOM.render(
+            <div>
+                <XFather />
+            </div>,
+            document.getElementById("demo")
+        )
+    </script>
+</body>
+</html>

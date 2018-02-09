@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- V -->
+    <div id="demo"></div>
+    <!-- React -->
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <!-- 注意类型 -->
+    <script type="text/babel">
+        // 定义组件
+        //Vue.component("xxx",{}) 组件首字母大写
+        const Xheader = React.createClass({
+            getInitialState(){
+                return {
+                    name: "第一个组件"
+                }
+            },
+            render(){
+                return <div ref="mydirective">{this.state.name}</div>
+            },
+            // beforeMounted
+            componentWillMount(){
+                console.log("--------------------")
+                console.log("----------在渲染前调用----------")
+                console.log(this.state)
+                this.setState({
+                    name: "组件在测试生命周期"
+                })
+                //this.refs.mydirective.style.color="red"
+                //console.log(this.refs.mydirective.style.color="red")
+            },
+            // mounted
+            componentDidMount(){
+                console.log("----------在第一次渲染后调用----------")
+                console.log(this.state)
+                this.refs.mydirective.style.color="red"
+                //console.log(this.refs.mydirective)
+            }
+        })
+        var data = {
+            name:456
+        }
+        ReactDOM.render(
+            <div>
+                <Xheader />
+            </div>,
+            document.getElementById("demo")
+        )
+    </script>
+</body>
+</html>

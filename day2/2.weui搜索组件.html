@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/weui.css">
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script type="text/babel">
+        const Xsearch = React.createClass({
+            // 提供初始化状态
+            getInitialState(){
+                return {
+                    bool:false,
+                    search:""
+                }
+            },
+            render(){ 
+                return ( 
+                    <div>
+                        <div className={this.state.bool?'weui-search-bar weui-search-bar_focusing':'weui-search-bar'} id="searchBar">
+                            <form className="weui-search-bar__form">
+                                <div className="weui-search-bar__box">
+                                    <i className="weui-icon-search"></i>
+                                    <input ref="input" onChange={this.getIunputValue} value={this.state.search} type="search" className="weui-search-bar__input" id="searchInput" placeholder="搜索" required="" />
+                                    <a href="javascript:" onClick={this.searchClear} className="weui-icon-clear" id="searchClear"></a>
+                                </div>
+                                <label onClick={this.toggle} className="weui-search-bar__label" id="searchText">
+                                    <i className="weui-icon-search"></i>
+                                    <span>搜索</span>
+                                </label>
+                            </form>
+                            <a href="javascript:" onClick={this.cancel} className="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                        </div>
+                        <form>
+                                <label htmlFor="male">Male</label>
+                                <input type="radio" name="sex" id="male" />
+                                <br />
+                                <label htmlFor="female">Female</label>
+                                <input type="radio" name="sex" id="female" />
+                        </form>
+                    </div>
+            )},
+            toggle(){
+                // this.bool = !this.bool
+                console.log(this.state)
+                this.setState({
+                    bool:true
+                })
+                this.refs.input.focus()
+                console.log(this.refs.input)
+            },
+            cancel(){
+                this.setState({
+                    bool:false
+                })
+            },
+            getIunputValue(event){
+                this.setState({
+                    search: event.target.value
+                })
+            },
+            searchClear(){
+                this.setState({
+                    search:""
+                })
+                this.refs.input.focus()
+            }
+        }) 
+        ReactDOM.render(
+        <div>
+            <Xsearch />
+        </div>, document.querySelector("#demo") )
+    </script>
+</body>
+
+</html>

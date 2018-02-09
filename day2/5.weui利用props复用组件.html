@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/weui.css">
+    <script src="../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/babel.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo"></div>
+    <script type="text/babel">
+        const Xpreview = React.createClass({
+            render(){ 
+                return (
+                    <div className="weui-form-preview">
+                        <div className="weui-form-preview__hd">
+                            <label className="weui-form-preview__label">付款金额</label>
+                            <em className="weui-form-preview__value">¥2400.00</em>
+                        </div>
+                        <div className="weui-form-preview__bd">
+                            <div className="weui-form-preview__item">
+                                <label className="weui-form-preview__label">商品</label>
+                                <span className="weui-form-preview__value">电动打蛋机</span>
+                            </div>
+                            <div className="weui-form-preview__item">
+                                <label className="weui-form-preview__label">标题标题</label>
+                                <span className="weui-form-preview__value">名字名字名字</span>
+                            </div>
+                            <div className="weui-form-preview__item">
+                                <label className="weui-form-preview__label">标题标题</label>
+                                <span className="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
+                            </div>
+                        </div>
+                        <div className="weui-form-preview__ft">
+                            <a style={{display:this.props.show==2?'block':'none'}} className="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">辅助操作</a>
+                            <button type="submit" className="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</button>
+                        </div>
+                    </div>
+                )
+            }
+        }) 
+        ReactDOM.render(
+        <div>
+            <Xpreview show="1" />
+            <Xpreview show="2" />
+        </div>,
+        	document.querySelector("#demo") 
+        )
+    </script>
+</body>
+
+</html>

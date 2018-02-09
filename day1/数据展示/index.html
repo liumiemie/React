@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- V -->
+    <div id="demo"></div>
+    <!-- React -->
+    <script src="../../js/react.js"></script>
+    <!-- ReactDOM -->
+    <script src="../../js/react-dom.js"></script>
+    <script src="../../js/babel.js"></script>
+    <!-- 注意类型 -->
+    <script type="text/babel">
+        var data = {
+            name:456,
+            id:"abc",
+            arr:[<li key="1">a</li>,<li key="2">b</li>,<li key="3">c</li>],
+            bool:true,
+            arr2:["a","b","c"],
+            mystyle:{
+                backgroundColor:"blue"
+            }
+        }
+        ReactDOM.render(
+            <div>
+                <p>1.显示在文本间</p>
+                <p>{data.name}</p>
+                <hr />
+                <p id={data.id}>2.显示在属性值</p>
+                <p>{data.name}</p>
+                <hr />
+                <p id={data.id}>3.显示数组</p>
+                <p>{data.arr[0]}</p>
+                <ul>{data.arr}</ul>
+                <hr />
+                <p>4.三元表达式</p>
+                <p>{!data.bool?"真的":"假的"}</p>
+                <hr />
+                <p>5.算数运算</p>
+                <p>{1+1+"2"}</p>
+                <hr />
+                <p>6.函数表达式</p>
+                <p>{
+                    (function(){
+                        let num = 1;
+                        return num
+                    })()
+                }</p>
+                <ul>
+                    {function() {
+                        return data.arr2.map(function(item,index) {
+                            console.log(item)
+                            return <li key={index}>{item}</li>
+                        })
+                    }()}
+                </ul>
+                <hr />
+                <p>7.样式</p>
+                <p style={{color:'red'}}>{1+1+"2"}</p>
+                <p style={data.mystyle}>{1+1+"2"}</p>
+                <hr />
+                <p>8.注释</p>
+                {/*asd*/}
+            </div>,
+            document.getElementById("demo")
+        )
+    </script>
+
+</body>
+</html>
